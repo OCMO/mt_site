@@ -1,0 +1,109 @@
+<mtapp:widget
+    class="welcome-to-loupe"
+    label="<__trans phrase="Welcome to Loupe">"
+    can_close="1">
+<mt:setvarblock name="widget_header">
+</mt:setvarblock>
+<div id="widget-container">
+    <p><__trans phrase="Loupe is a mobile-friendly alternative console for Movable Type to let users approve pending entries and comments, upload photos, and view website and blog statistics. <a href="http://www.movabletype.org/documentation/loupe/" target="_blank">See more details.</a>"></p>
+    <p><__trans phrase="Loupe can be used without complex configuration, you can get started immediately."></p>
+    <p class="msg-text"><a id="loupe_settings_link" href="" onclick="return false;"><__trans phrase="Configure Loupe"></a></p>
+
+    <div id="loupe_settings" style="display: none;">
+
+        <div id="loupe_url-field" class="field field-left-label ">
+            <div id="loupe_field-header" class="field-header">
+                <label id="loupe_url-label" for="loupe_url">URL</label>
+            </div>
+
+            <div id="loupe_field-content" class="field-content">
+                <mt:var name="support_directory_url">loupe/<input type="text" id="loupe_file" class="text path" name="file" value="<mt:var name="file">"/>
+                <div class="hint"><__trans phrase="The URL of Loupe's HTML file."></div>
+            </div>
+        </div>
+
+        <div class="actions-bar settings-actions-bar">
+            <button
+                id="loupe-save-changes"
+                class="save action primary button"
+                onclick="return false;">
+                <__trans phrase="Save Changes">
+            </button>
+        </div>
+
+    </div>
+</div>
+</mtapp:widget>
+
+<style type="text/css">
+#welcome_to_loupe {
+    background-color: #f3f3f5;
+}
+#welcome_to_loupe .widget-header{
+    background: #3b9486;
+    filter: progid:DXImageTransform.Microsoft.gradient(
+      startColorstr='#3b9486',
+      endColorstr='#348275',
+      GradientType=0
+    );
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3b9486), color-stop(80%, #3b9486), color-stop(100%, #348275));
+    background-image: -webkit-linear-gradient(#3b9486, #3b9486 80%, #348275 100%);
+    background-image: -moz-linear-gradient(#3b9486, #3b9486 80%, #348275 100%);
+    background-image: -o-linear-gradient(#3b9486, #3b9486 80%, #348275 100%);
+    background-image: linear-gradient(#3b9486, #3b9486 80%, #348275 100%);
+    color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+#welcome_to_loupe .widget-header .widget-close-link{
+    background-color: #f3f3f3;
+}
+.ui-dialog {
+    z-index: 2500;
+}
+#loupe_field-header {
+    width: 3em;
+}
+#loupe_field-content {
+    margin-left: 5em;
+}
+</style>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    jQuery('a#loupe_settings_link').click(function(){
+        jQuery(this).parent().hide();
+        jQuery('div#loupe_settings').show();
+    });
+<mt:if name="loupe_error">
+    jQuery('a#loupe_settings_link').trigger('click');
+</mt:if>
+
+    jQuery('button#loupe-save-changes').click(function(){
+        var data = {
+                __mode: 'save_loupe_config',
+                magic_token: '<mt:var name="magic_token">',
+                file: jQuery('input#loupe_file').val()
+            },
+            form = jQuery('<form />')
+                .attr({
+                    action: '<mt:var name="script_url">',
+                    method: 'post'
+                })
+                .hide();
+        for ( key in data ) {
+            var input = jQuery('<input />')
+                .attr({
+                    name: key,
+                    value: data[key]
+                });
+            form.append(input);
+        }
+        jQuery(document.body).append(form);
+        form.submit();
+        form.remove();
+        return false;
+    });
+/* ]]> */
+</script>

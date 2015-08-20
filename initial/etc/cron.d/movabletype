@@ -1,0 +1,4 @@
+SHELL=/bin/sh
+PERL5LIB=/app/local/lib64/perl5:/app/movabletype/lib:/app/movabletype/extlib
+
+*/5 * * * * www cd /app/movabletype; ./tools/run-periodic-tasks > /dev/null 2>&1

@@ -1,0 +1,12 @@
+/app/local/lib64/perl5/HTTP/Body.pm
+/app/local/lib64/perl5/HTTP/Body/MultiPart.pm
+/app/local/lib64/perl5/HTTP/Body/OctetStream.pm
+/app/local/lib64/perl5/HTTP/Body/UrlEncoded.pm
+/app/local/lib64/perl5/HTTP/Body/XForms.pm
+/app/local/lib64/perl5/HTTP/Body/XFormsMultipart.pm
+/app/local/man/man3/HTTP::Body.3pm
+/app/local/man/man3/HTTP::Body::MultiPart.3pm
+/app/local/man/man3/HTTP::Body::OctetStream.3pm
+/app/local/man/man3/HTTP::Body::UrlEncoded.3pm
+/app/local/man/man3/HTTP::Body::XForms.3pm
+/app/local/man/man3/HTTP::Body::XFormsMultipart.3pm

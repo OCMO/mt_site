@@ -1,0 +1,8 @@
+/app/local/lib64/perl5/Convert/ASN1.pm
+/app/local/lib64/perl5/Convert/ASN1.pod
+/app/local/lib64/perl5/Convert/ASN1/Debug.pm
+/app/local/lib64/perl5/Convert/ASN1/IO.pm
+/app/local/lib64/perl5/Convert/ASN1/_decode.pm
+/app/local/lib64/perl5/Convert/ASN1/_encode.pm
+/app/local/lib64/perl5/Convert/ASN1/parser.pm
+/app/local/man/man3/Convert::ASN1.3pm

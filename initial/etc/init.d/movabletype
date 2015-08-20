@@ -1,0 +1,101 @@
+#!/bin/sh
+#
+# chkconfig: - 64 36
+# description: movabletype
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+[ "$NETWORKING" = "no" ] && exit 0
+
+. /data/conf/movabletype.conf
+
+export MT_HOME=/app/movabletype
+export PERL5LIB=/app/local/lib64/perl5:/app/movabletype/lib
+export LD_LIBRARY_PATH=/app/local/lib64:/app/local/lib
+
+pid="/app/run/movabletype.pid"
+socket="/app/run/movabletype.sock"
+errorlog="/data/logs/movabletype/movabletype.log"
+
+starman="/app/local/bin/starman"
+prog=$(basename $starman)
+
+option="--daemonize --workers=$WORKERS --listen :$PORT --listen ${socket} --error-log=$errorlog --pid=$pid ${MT_HOME}/mt.psgi"
+
+lockfile="/var/lock/subsys/movabletype"
+
+start() {
+    echo -n $"Starting movabletype: "
+    cd $MT_HOME
+    daemon --user=www $starman $option
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && touch $lockfile
+    while :
+    do
+        sleep 2
+        if [ -S ${socket} ]; then
+            chmod 777 ${socket}
+            break
+        fi
+    done
+    return $retval
+}
+
+stop() {
+    echo -n $"Stopping movabletype: "
+    killproc -p $pid $prog
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && rm -f $lockfile
+    return $retval
+}
+
+restart() {
+    stop
+    sleep 1
+    start
+}
+
+reload() {
+    echo -n $"Reloading $prog: "
+    killproc $prog -HUP
+    RETVAL=$?
+    echo
+}
+
+rh_status() {
+    status -p $pid $prog
+}
+
+rh_status_q() {
+    rh_status >/dev/null 2>&1
+}
+
+case "$1" in
+    start)
+        rh_status_q && exit 0
+        $1
+        ;;
+    stop)
+        rh_status_q || exit 0
+        $1
+        ;;
+    restart)
+        $1
+        ;;
+    status)
+        rh_status
+        ;;
+    reload)
+        $1
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|restart|status|reload}"
+        exit 2
+esac
