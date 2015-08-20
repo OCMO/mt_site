@@ -42,3 +42,8 @@ movabletype/t/site/
 movabletype/t/db/mt.db
 
 static/*.html
+
+aws
+initial
+local
+run

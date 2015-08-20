@@ -1,8 +1,0 @@
-/app/local/lib64/perl5/ExtUtils/Helpers.pm
-/app/local/lib64/perl5/ExtUtils/Helpers/Unix.pm
-/app/local/lib64/perl5/ExtUtils/Helpers/VMS.pm
-/app/local/lib64/perl5/ExtUtils/Helpers/Windows.pm
-/app/local/man/man3/ExtUtils::Helpers.3pm
-/app/local/man/man3/ExtUtils::Helpers::Unix.3pm
-/app/local/man/man3/ExtUtils::Helpers::VMS.3pm
-/app/local/man/man3/ExtUtils::Helpers::Windows.3pm
